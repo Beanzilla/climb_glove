@@ -2,7 +2,7 @@
 local climb = {}
 
 function climb.version()
-  return "1.2"
+  return "1.2.1"
 end
 
 -- Attempt to detect what gamemode/game these folks are running on
@@ -77,8 +77,19 @@ minetest.register_tool("climb_glove:adv_glove", {
 })
 
 -- Crafting
-local basic_craft = minetest.settings.get_bool("climb_craft_basic") or false
-local adv_craft = minetest.settings.get_bool("climb_craft_advanced") or false
+local basic_craft = minetest.settings:get_bool("climb_glove.craft_basic")
+local adv_craft = minetest.settings:get_bool("climb_glove.craft_advanced")
+
+-- If they are unassigned then assign them
+if basic_craft == nil then
+    basic_craft = false -- Automatic Default
+    minetest.settings:set_bool("climb_glove.craft_basic", false)
+end
+if adv_craft == nil then
+    adv_craft = false -- Automatic Default
+    minetest.settings:set_bool("climb_glove.craft_advanced", false)
+end
+
 local gm = climb.game_mode()
 local empty = ""
 local iron = ""
