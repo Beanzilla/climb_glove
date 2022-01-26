@@ -77,23 +77,24 @@ minetest.register_tool("climb_glove:adv_glove", {
 })
 
 -- Crafting
-local allow_crafts = minetest.settings.get_bool("climb_crafting") or false
-if allow_crafts == true then
-    local gm = climb.game_mode()
-    local empty = ""
-    local iron = ""
-    local gold = ""
-    local diamond = ""
-    local glove = "climb_glove:basic_glove" -- Used in making a advanced glove
-    if gm == "MTG" then
-        iron = "default:steel_ingot"
-        gold = "default:gold_ingot"
-        diamond = "default:diamond"
-    elseif gm == "MCL" then
-        iron = "mcl_core:iron_ingot"
-        gold = "mcl_core:gold_ingot"
-        diamond = "mcl_core:diamond"
-    end
+local basic_craft = minetest.settings.get_bool("climb_craft_basic") or false
+local adv_craft = minetest.settings.get_bool("climb_craft_advanced") or false
+local gm = climb.game_mode()
+local empty = ""
+local iron = ""
+local gold = ""
+local diamond = ""
+local glove = "climb_glove:basic_glove" -- Used in making a advanced glove
+if gm == "MTG" then
+    iron = "default:steel_ingot"
+    gold = "default:gold_ingot"
+    diamond = "default:diamond"
+elseif gm == "MCL" then
+    iron = "mcl_core:iron_ingot"
+    gold = "mcl_core:gold_ingot"
+    diamond = "mcl_core:diamond"
+end
+if basic_craft then -- only allow if basic crafting is allowed
     minetest.register_craft({
         output = "climb_glove:basic_glove",
         recipe = {
@@ -102,6 +103,8 @@ if allow_crafts == true then
             {gold, gold, empty}
         }
     })
+end
+if basic_craft and adv_craft then -- only allow if both basic crafting an advanced crafting
     minetest.register_craft({
         output = "climb_glove:adv_glove",
         recipe = {

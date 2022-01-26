@@ -17,7 +17,7 @@ With a basic glove just look at say some nodes (like a tree), then just rapidly 
 
 All you need to do to allow crafting is:
 
-1. Add `climb_crafting = true` to your `minetest.conf` file
+1. Add `climb_craft_basic = true` to your `minetest.conf` file (and if you want the advanced one too, `climb_craft_advanced = true`)
 2. (Restart if running, else enjoy)
 
 ## Credits
