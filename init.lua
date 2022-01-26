@@ -2,7 +2,7 @@
 local climb = {}
 
 function climb.version()
-  return "1.1"
+  return "1.2"
 end
 
 -- Attempt to detect what gamemode/game these folks are running on
