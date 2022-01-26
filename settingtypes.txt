@@ -1,0 +1,5 @@
+
+# https://github.com/minetest/minetest/blob/master/builtin/settingtypes.txt#L1
+
+# Can anyone craft climbing gloves (also includes upgrading the basic to advanced)
+climb_crafting (Climb Glove - Crafting) bool false

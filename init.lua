@@ -77,37 +77,40 @@ minetest.register_tool("climb_glove:adv_glove", {
 })
 
 -- Crafting
-local gm = climb.game_mode()
-local empty = ""
-local iron = ""
-local gold = ""
-local diamond = ""
-local glove = "climb_glove:basic_glove" -- Used in making a advanced glove
-if gm == "MTG" then
-    iron = "default:steel_ingot"
-    gold = "default:gold_ingot"
-    diamond = "default:diamond"
-elseif gm == "MCL" then
-    iron = "mcl_core:iron_ingot"
-    gold = "mcl_core:gold_ingot"
-    diamond = "mcl_core:diamond"
+local allow_crafts = minetest.settings.get_bool("climb_crafting") or false
+if allow_crafts == true then
+    local gm = climb.game_mode()
+    local empty = ""
+    local iron = ""
+    local gold = ""
+    local diamond = ""
+    local glove = "climb_glove:basic_glove" -- Used in making a advanced glove
+    if gm == "MTG" then
+        iron = "default:steel_ingot"
+        gold = "default:gold_ingot"
+        diamond = "default:diamond"
+    elseif gm == "MCL" then
+        iron = "mcl_core:iron_ingot"
+        gold = "mcl_core:gold_ingot"
+        diamond = "mcl_core:diamond"
+    end
+    minetest.register_craft({
+        output = "climb_glove:basic_glove",
+        recipe = {
+            {empty, iron, iron},
+            {gold, diamond, iron},
+            {gold, gold, empty}
+        }
+    })
+    minetest.register_craft({
+        output = "climb_glove:adv_glove",
+        recipe = {
+            {diamond, iron, iron},
+            {gold, glove, iron},
+            {gold, gold, diamond}
+        }
+    })
 end
-minetest.register_craft({
-    output = "climb_glove:basic_glove",
-    recipe = {
-        {empty, iron, iron},
-        {gold, diamond, iron},
-        {gold, gold, empty}
-    }
-})
-minetest.register_craft({
-    output = "climb_glove:adv_glove",
-    recipe = {
-        {diamond, iron, iron},
-        {gold, glove, iron},
-        {gold, gold, diamond}
-    }
-})
 
 -- Indicate ready
 minetest.log("action", "[climb_glove] Running version  "..climb.version())
