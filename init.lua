@@ -2,7 +2,7 @@
 local climb = {}
 
 function climb.version()
-  return "1.2.1"
+  return "1.2.2"
 end
 
 -- Attempt to detect what gamemode/game these folks are running on
@@ -27,18 +27,14 @@ function climb.on_punchy_norm(itemstack, user, pointed_thing)
     if pointed_thing.type == "nothing" then
         return
     end
-    local tool_definition = itemstack:get_definition()
-    local tool_cap = tool_definition.tool_capabilities.groupcaps.climbing.maxlevel
     -- minetest API now allows to set speed of player
-    local jump2_speed = 3.25 + tool_cap
+    local jump2_speed = 6.25
     user:add_player_velocity({x=0, y=jump2_speed, z=0})
 end -- The advanced jumpy force
 function climb.on_punchy_adv(itemstack, user, pointed_thing)
     -- Advanced glove doesn't need nodes, so you just punch
-    local tool_definition = itemstack:get_definition()
-    local tool_cap = tool_definition.tool_capabilities.groupcaps.climbing.maxlevel
     -- minetest API now allows to set speed of player
-    local jump2_speed = 3.25 + tool_cap
+    local jump2_speed = 6.25
     user:add_player_velocity({x=0, y=jump2_speed, z=0})
 end
 
